@@ -1,13 +1,25 @@
-# Create a workflow that get an ip info and operations system in a txt file 
-# named infro.txt and zip this file and upload artifact
+# Create a workflow that gets IP info and OS details in a txt file 
+# named info.txt, zips this file, and uploads it as an artifact.
 name: Template Artifact
 on:
   workflow_call
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Get ip info
+    - name: Get IP and OS info
       run: |
-        echo "Runner Hostname: $(hostname)"
-        curl http//ipinfo.io/ip
+        echo "Runner Hostname: $(hostname)" > info.txt
+        echo "Public IP: $(curl -s http://ipinfo.io/ip)" >> info.txt
+        echo "Operating System: $(uname -a)" >> info.txt
+
+    - name: Zip the info.txt file
+      run: |
+        zip info.zip info.txt
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: info-artifact
+        path: info.zip

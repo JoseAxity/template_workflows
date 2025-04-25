@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.13'
-
+        
     - name: Create package
       run: |
         mkdir hello_world_package
@@ -30,7 +30,7 @@ jobs:
     - name: Publish package
       run: |
         python -m pip install --upgrade twine
-        python -m twine upload --repository-url https://upload.pypi.org/legacy/ --skip-existing dist/*
+        python -m twine upload --repository-url https://maven.pkg.github.com/${{ github.repository }} dist/* --verbose
       env:
         TWINE_USERNAME: ${{ github.actor }}
         TWINE_PASSWORD: ${{ secrets.GH_TOKEN }}

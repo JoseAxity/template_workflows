@@ -1,0 +1,11 @@
+name: Template Artifact
+on:
+  workflow_call
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get ip info
+      run: |
+        echo "Runner Hostname: $(hostname)"
+        curl http//ipinfo.io/ip

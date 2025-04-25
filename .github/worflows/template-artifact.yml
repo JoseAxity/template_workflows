@@ -1,0 +1,13 @@
+# Create a workflow that get an ip info and operations system in a txt file 
+# named infro.txt and zip this file and upload artifact
+name: Template Artifact
+on:
+  workflow_call
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get ip info
+      run: |
+        echo "Runner Hostname: $(hostname)"
+        curl http//ipinfo.io/ip

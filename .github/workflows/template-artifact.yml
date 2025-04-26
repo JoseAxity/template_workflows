@@ -2,7 +2,8 @@
 # named info.txt, zips this file, and uploads it as an artifact.
 name: Template Artifact
 on:
-  workflow_call
+  workflow_call:
+  workflow_dispatch:
 
 jobs:
   build:

@@ -26,11 +26,13 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install --upgrade build
         python -m build
+        ls -la
+        cd dist
+        ls -la
     
-    - name: Publish package
-      run: |
-        python -m pip install --upgrade twine
-        python -m twine upload --repository-url https://maven.pkg.github.com/${{ github.repository }} dist/* --verbose
+    - name: Construir y publicar
       env:
-        TWINE_USERNAME: ${{ github.actor }}
-        TWINE_PASSWORD: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        python -m build
+        python -m twine upload --repository-url https://maven.pkg.github.com/${{ github.repository }} dist/* --username ${{ github.actor }} --password ${{ secrets.GH_TOKEN }}

@@ -2,7 +2,10 @@
 # build the package and publish package using twine upload to my github package account.
 name: Template Package
 on:
-  workflow_call
+  workflow_call:
+  workflow_dispatch:
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
